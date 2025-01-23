@@ -36,8 +36,28 @@
   {%- endunless -%}
 {%- endfor -%}
 },
-"mac_dependencies":{{ fdata.mac_dependencies | jsonify }},
-"linux_dependencies":{{ fdata.linux_dependencies | jsonify }},
-"mac_caveats":{{ fdata.mac_caveats | jsonify }},
-"linux_caveats":{{ fdata.linux_caveats | jsonify }},
+"mac_dependencies": [
+  {%- for dep in fdata.mac_dependencies -%}
+    {
+      "name": "{{ dep.name }}",
+      "version": "{{ dep.version }}"
+    }
+    {%- unless forloop.last -%}
+    ,
+    {%- endunless -%}
+  {%- endfor -%}
+],
+"linux_dependencies": [
+  {%- for dep in fdata.linux_dependencies -%}
+    {
+      "name": "{{ dep.name }}",
+      "version": "{{ dep.version }}"
+    }
+    {%- unless forloop.last -%}
+    ,
+    {%- endunless -%}
+  {%- endfor -%}
+],
+"mac_caveats": "{{ fdata.mac_caveats | escape }}",
+"linux_caveats": "{{ fdata.linux_caveats | escape }}",
 "generated_date":"{{ "today" | date: "%F" }}"}
