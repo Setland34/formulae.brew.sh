@@ -233,3 +233,42 @@ permalink: :title
   {%- endfor -%}
 {%- endfor %}
 </table>
+
+<!-- Separate tables for macOS and Linux dependencies -->
+{%- if f.variations.size > 0 -%}
+    <p>Dependencies:</p>
+    <table>
+        <tr>
+            <th>OS</th>
+            <th>Dependencies</th>
+        </tr>
+        {%- for variation in f.variations -%}
+            <tr>
+                <td>{{ variation[0] | capitalize }}</td>
+                <td>
+                    {%- for dep in variation[1].dependencies -%}
+                        {{ dep | escape }}
+                        {%- unless forloop.last -%}, {% endunless -%}
+                    {%- endfor -%}
+                </td>
+            </tr>
+        {%- endfor -%}
+    </table>
+{%- endif -%}
+
+<!-- Separate sections for macOS and Linux caveats -->
+{%- if f.caveats -%}
+    <p>Caveats:</p>
+    <table>
+        <tr>
+            <th>OS</th>
+            <th>Caveats</th>
+        </tr>
+        {%- for variation in f.variations -%}
+            <tr>
+                <td>{{ variation[0] | capitalize }}</td>
+                <td>{{ variation[1].caveats | escape }}</td>
+            </tr>
+        {%- endfor -%}
+    </table>
+{%- endif -%}
