@@ -36,4 +36,12 @@
   {%- endunless -%}
 {%- endfor -%}
 },
+"dependencies":{
+  "macos":{{ fdata.dependencies.macos | jsonify }},
+  "linux":{{ fdata.dependencies.linux | jsonify }}
+},
+"caveats":{
+  "macos":{{ fdata.caveats.macos | jsonify }},
+  "linux":{{ fdata.caveats.linux | jsonify }}
+},
 "generated_date":"{{ "today" | date: "%F" }}"}
